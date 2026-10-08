@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mounika Gumpula — Full Stack Developer & AI Enthusiast</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        darkBg: '#06070b',
+                        darkCard: '#131520',
+                        neonPurple: '#a855f7',
+                        neonPink: '#ec4899',
+                        neonCyan: '#06b6d4',
+                        neonBlue: '#3b82f6',
+                    },
+                    boxShadow: {
+                        'neon-glow': '0 0 25px rgba(168, 85, 247, 0.4), inset 0 0 15px rgba(236, 72, 153, 0.2)',
+                        'cyan-glow': '0 0 20px rgba(6, 182, 212, 0.5)',
+                        'purple-glow': '0 0 25px rgba(168, 85, 247, 0.6)',
+                        'pink-glow': '0 0 25px rgba(236, 72, 153, 0.5)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #06070b;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+
+        /* Seamless Hero Background Blending */
+        .hero-bg-wrapper {
+            position: relative;
+            background: linear-gradient(to bottom, rgba(6,7,11,0.3) 0%, rgba(6,7,11,0.85) 75%, #06070b 100%),
+                        url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(0.5deg); }
+        }
+
+        @keyframes floatReverse {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(10px) rotate(-0.5deg); }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.5; filter: drop-shadow(0 0 20px rgba(168,85,247,0.4)); }
+            50% { opacity: 0.8; filter: drop-shadow(0 0 40px rgba(236,72,153,0.7)); }
+        }
+
+        .animate-float {
+            animation: floatSlow 7s ease-in-out infinite;
+        }
+
+        .hero-visual {
+            position: relative;
+            width: min(105%, 1000px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-visual img {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .animate-float-rev {
+            animation: floatReverse 8s ease-in-out infinite;
+        }
+
+        .animate-pulse-glow {
+            animation: pulseGlow 5s ease-in-out infinite;
+        }
+
+        .glass-panel {
+            background: rgba(19, 21, 32, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(168, 85, 247, 0.25);
+        }
+
+        .glass-panel-cyan {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-btn {
+            background: linear-gradient(135deg, #9333ea 0%, #db2777 100%);
+            transition: all 0.3s ease;
+        }
+
+        .gradient-btn:hover {
+            background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+            box-shadow: 0 0 30px rgba(236, 72, 153, 0.6);
+            transform: translateY(-2px);
+        }
+
+        /* 3D Interactive Project Card Styles */
+        .project-card-3d {
+            transition: transform 0.4s cubic-bezier(0.03, 0.98, 0.52, 0.99), box-shadow 0.4s ease, border-color 0.4s ease;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .project-card-3d:hover {
+            transform: translateY(-8px) rotateX(2deg) rotateY(-2deg);
+            box-shadow: 0 20px 40px rgba(168, 85, 247, 0.25);
+        }
+
+        /* 3D Certificate Card Flip Effect */
+        .cert-card-container {
+            perspective: 1000px;
+        }
+
+        .cert-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .cert-card-container:hover .cert-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .cert-card-front, .cert-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 1.5rem;
+        }
+
+        .cert-card-back {
+            transform: rotateY(180deg);
+            background: linear-gradient(135deg, rgba(29, 20, 52, 0.95), rgba(15, 23, 42, 0.95));
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #06070b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2e1065;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #7c3aed;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-gray-100 font-sans selection:bg-purple-500 selection:text-white relative">
+
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-50 px-6 lg:px-16 py-4 glass-panel border-b border-purple-900/30">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-3 group cursor-pointer">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-purple-600 via-pink-600 to-cyan-500 p-[2px] shadow-lg shadow-purple-900/40 group-hover:scale-105 transition-transform">
+                    <div class="w-full h-full bg-darkCard rounded-[10px] flex items-center justify-center font-bold text-lg text-white">
+                        MG
+                    </div>
+                </div>
+                <span class="font-bold text-lg lg:text-xl tracking-wide bg-gradient-to-r from-white via-gray-200 to-purple-300 bg-clip-text text-transparent">
+                    Mounika Gumpula
+                </span>
+            </div>
+
+            <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-gray-300">
+                <a href="#about" class="hover:text-purple-400 transition-colors">About</a>
+                <a href="#skills" class="hover:text-purple-400 transition-colors">Skills</a>
+                <a href="#education" class="hover:text-purple-400 transition-colors">Education</a>
+                <a href="#certifications" class="hover:text-purple-400 transition-colors">Certifications</a>
+                <a href="#projects" class="hover:text-purple-400 transition-colors">Projects</a>
+                <a href="#experience" class="hover:text-purple-400 transition-colors">Experience</a>
+                <a href="#contact" class="hover:text-purple-400 transition-colors">Contact</a>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <a href="#contact" class="hidden sm:inline-flex px-4 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider text-purple-300 border border-purple-500/40 hover:bg-purple-950/40 hover:border-purple-400 transition-all shadow-purple-950 shadow-inner">
+                    Let's Talk
+                </a>
+                <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white p-2 focus:outline-none">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 right-0 glass-panel border-b border-purple-900/50 py-4 px-6 flex flex-col gap-4 shadow-2xl">
+            <a href="#about" class="mobile-link text-gray-300 hover:text-purple-400 font-medium py-1">About</a>
+            <a href="#skills" class="mobile-link text-gray-300 hover:text-purple-400 font-medium py-1">Skills</a>
+            <a href="#education" class="mobile-link text-gray-300 hover:text-purple-400 font-medium py-1">Education</a>
+            <a href="#certifications" class="mobile-link text-gray-300 hover:text-purple-400 font-medium py-1">Certifications</a>
+            <a href="#projects" class="mobile-link text-gray-300 hover:text-purple-400 font-medium py-1">Projects</a>
+            <a href="#experience" class="mobile-link text-gray-300 hover:text-purple-400 font-medium py-1">Experience</a>
+            <a href="#contact" class="mobile-link text-gray-300 hover:text-purple-400 font-medium py-1">Contact</a>
+        </div>
+    </header>
+
+    <!-- Hero Section with Seamlessly Blended Illustration Background -->
+    <main class="hero-bg-wrapper pt-28 lg:pt-36 pb-20 px-6 lg:px-16 min-h-screen flex items-center relative overflow-hidden">
+        
+        <!-- Ambient Atmospheric Glow Layers -->
+        <div class="absolute top-1/4 right-10 w-[500px] h-[500px] bg-gradient-to-tr from-purple-600/20 via-pink-600/15 to-cyan-500/20 rounded-full blur-[100px] pointer-events-none animate-pulse-glow"></div>
+        <div class="absolute bottom-10 left-10 w-[400px] h-[400px] bg-gradient-to-tr from-cyan-600/15 via-purple-600/15 to-transparent rounded-full blur-[90px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+            
+            <!-- Left Column: Content & Bio -->
+            <div class="lg:col-span-6 flex flex-col items-start z-10">
+                
+                <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass-panel border border-emerald-500/30 text-emerald-400 text-xs lg:text-sm font-medium mb-6 shadow-lg shadow-emerald-950/20">
+                    <span class="relative flex h-2.5 w-2.5">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                    </span>
+                    Available for Opportunities
+                </div>
+
+                <h2 class="text-xs lg:text-sm font-bold tracking-[0.25em] text-purple-400 uppercase mb-3">
+                    Full Stack Developer
+                </h2>
+
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6">
+                    Hi, I'm <br class="hidden sm:inline"/>
+                    <span class="gradient-text drop-shadow-[0_0_35px_rgba(168,85,247,0.5)]">
+                        Mounika Gumpula.
+                    </span>
+                </h1>
+
+                <p class="text-gray-300 text-base lg:text-lg font-light leading-relaxed max-w-xl mb-8">
+                    I build modern, intuitive web applications with <span class="text-purple-300 font-medium">React</span>, <span class="text-cyan-300 font-medium">Node.js</span>, <span class="text-pink-300 font-medium">Express</span>, <span class="text-emerald-300 font-medium">MongoDB</span>, and <span class="text-purple-400 font-medium">AI</span> — turning thoughtful ideas into useful digital experiences.
+                </p>
+
+                <div class="flex flex-wrap items-center gap-4 mb-10">
+                    <a href="#projects" class="gradient-btn px-7 py-3.5 rounded-2xl font-semibold text-white flex items-center gap-3 shadow-lg shadow-purple-950">
+                        View My Work 
+                        <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </a>
+                    <a href="#contact" class="px-7 py-3.5 rounded-2xl font-semibold text-gray-200 glass-panel border border-purple-500/40 hover:border-cyan-400 hover:text-cyan-300 hover:shadow-cyan-glow transition-all flex items-center gap-3">
+                        Let's Connect 
+                        <i class="fa-solid fa-paper-plane text-xs text-purple-400"></i>
+                    </a>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <a href="https://github.com/MounikaGumpula645" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="w-11 h-11 rounded-xl glass-panel flex items-center justify-center text-gray-300 hover:text-white hover:border-purple-400 hover:shadow-purple-glow transition-all">
+                        <i class="fa-brands fa-github text-lg"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/mounika-gumpula-4110b234a/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="w-11 h-11 rounded-xl glass-panel flex items-center justify-center text-gray-300 hover:text-cyan-400 hover:border-cyan-400 hover:shadow-cyan-glow transition-all">
+                        <i class="fa-brands fa-linkedin-in text-lg"></i>
+                    </a>
+                    <a href="mailto:mounikagumpula66@gmail.com" aria-label="Email" class="w-11 h-11 rounded-xl glass-panel flex items-center justify-center text-gray-300 hover:text-pink-400 hover:border-pink-400 hover:shadow-pink-glow transition-all">
+                        <i class="fa-solid fa-envelope text-lg"></i>
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Right Column: Exact Hero Image Seamlessly Evolved into Atmospheric Interactive Display -->
+            <div class="lg:col-span-6 relative flex items-center justify-center min-h-[500px] lg:min-h-[620px]">
+                
+                <!-- Hero Image Blended Into Background -->
+                <div class="hero-visual">
+                    <img src="hero.png" alt="Mounika Gumpula Hero Illustration">
+                </div>
+
+                <!-- Floating Tech Badge 1: React -->
+                <div class="absolute -top-4 left-2 sm:-left-6 glass-panel-cyan px-4 py-3 rounded-2xl flex items-center gap-3 animate-float shadow-cyan-glow border border-cyan-400/40 z-20">
+                    <div class="w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-400 flex items-center justify-center text-cyan-300">
+                        <i class="fa-brands fa-react text-xl animate-spin" style="animation-duration: 12s;"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-cyan-300 font-bold uppercase tracking-wider">Frontend</div>
+                        <div class="text-sm font-semibold text-white">React.js</div>
+                    </div>
+                </div>
+
+                <!-- Floating Tech Badge 2: Node.js -->
+                <div class="absolute top-4 right-0 sm:-right-4 glass-panel px-4 py-3 rounded-2xl flex items-center gap-3 animate-float-rev shadow-purple-glow border border-purple-400/40 z-20">
+                    <div class="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-400 flex items-center justify-center text-purple-300">
+                        <i class="fa-brands fa-node-js text-xl"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-purple-300 font-bold uppercase tracking-wider">Backend</div>
+                        <div class="text-sm font-semibold text-white">Node.js</div>
+                    </div>
+                </div>
+
+                <!-- Floating Tech Badge 3: MongoDB -->
+                <div class="absolute top-1/2 -right-6 sm:-right-10 glass-panel px-4 py-3 rounded-2xl flex items-center gap-3 animate-float shadow-pink-glow border border-pink-400/40 z-20">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-400 flex items-center justify-center text-emerald-300">
+                        <i class="fa-solid fa-database text-lg"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-emerald-300 font-bold uppercase tracking-wider">Database</div>
+                        <div class="text-sm font-semibold text-white">MongoDB</div>
+                    </div>
+                </div>
+
+                <!-- Floating Code Snippet Card -->
+                <div class="absolute -bottom-8 right-2 sm:right-6 glass-panel p-3.5 rounded-2xl font-mono text-[11px] text-gray-300 shadow-2xl border border-purple-500/40 z-20 max-w-[260px] animate-float-rev hidden sm:block">
+                    <div class="flex items-center justify-between text-purple-400 mb-1.5 pb-1 border-b border-purple-900/40 text-[10px]">
+                        <span>developer.js</span>
+                        <div class="flex gap-1">
+                            <span class="w-2 h-2 rounded-full bg-purple-500"></span>
+                            <span class="w-2 h-2 rounded-full bg-pink-500"></span>
+                        </div>
+                    </div>
+                    <p><span class="text-pink-400">const</span> developer = {</p>
+                    <p class="pl-3">name: <span class="text-cyan-300">"Mounika"</span>,</p>
+                    <p class="pl-3">skills: [<span class="text-purple-300">"React"</span>, <span class="text-purple-300">"AI"</span>],</p>
+                    <p class="pl-3">passion: <span class="text-cyan-300">"Building Ideas"</span></p>
+                    <p>};</p>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 px-6 lg:px-16 relative border-t border-purple-900/20">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-xs lg:text-sm font-bold tracking-[0.25em] text-purple-400 uppercase mb-3">Get to Know Me</h2>
+                <h3 class="text-3xl lg:text-5xl font-extrabold tracking-tight">About <span class="gradient-text">Mounika Gumpula</span></h3>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-5 relative">
+                    <div class="w-full aspect-square rounded-3xl glass-panel p-4 border border-purple-500/30 relative overflow-hidden group shadow-2xl">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-purple-900/40 via-transparent to-cyan-500/20 opacity-80 group-hover:scale-105 transition-transform duration-500"></div>
+                        <div class="w-full h-full rounded-2xl bg-darkCard flex flex-col items-center justify-center p-8 text-center relative z-10 border border-purple-500/20">
+                            <div class="w-24 h-24 rounded-2xl bg-gradient-to-tr from-purple-600 to-pink-600 p-1 mb-6 shadow-purple-glow">
+                                <div class="w-full h-full bg-darkCard rounded-xl flex items-center justify-center text-3xl font-extrabold text-white">
+                                    MG
+                                </div>
+                            </div>
+                            <h4 class="text-xl font-bold text-white mb-2">Mounika Gumpula</h4>
+                            <p class="text-purple-300 text-sm font-medium mb-4">Full Stack & AI Web Developer</p>
+                            <div class="flex gap-3 text-xs text-gray-400">
+                                <span class="px-3 py-1 rounded-full glass-panel border border-purple-500/30">📍 India</span>
+                                <span class="px-3 py-1 rounded-full glass-panel border border-cyan-500/30">🎓 B.Tech CSE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 flex flex-col gap-6">
+                    <h4 class="text-2xl lg:text-3xl font-bold text-gray-100 leading-snug">
+                        Passionate about crafting scalable web architectures and intelligent digital solutions.
+                    </h4>
+                    <p class="text-gray-300 font-light leading-relaxed">
+                        Hello! I'm Mounika Gumpula, a dedicated Full Stack Developer with a strong foundation in modern web technologies and artificial intelligence integration. I thrive at the intersection of clean design logic and robust backend engineering.
+                    </p>
+                    <p class="text-gray-300 font-light leading-relaxed">
+                        Whether architecting RESTful APIs with Node.js and Express, designing reactive user interfaces with React, or managing high-performance databases in MongoDB, I bring dedication and attention to detail to every line of code I write.
+                    </p>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 pt-4">
+                        <div class="glass-panel p-5 rounded-2xl border border-purple-500/20">
+                            <div class="text-3xl font-extrabold text-purple-400 mb-1">15+</div>
+                            <div class="text-xs text-gray-300 font-medium">Completed Projects</div>
+                        </div>
+                        <div class="glass-panel p-5 rounded-2xl border border-cyan-500/20">
+                            <div class="text-3xl font-extrabold text-cyan-400 mb-1">99%</div>
+                            <div class="text-xs text-gray-300 font-medium">Client Satisfaction</div>
+                        </div>
+                        <div class="glass-panel p-5 rounded-2xl border border-pink-500/20 col-span-2 sm:col-span-1">
+                            <div class="text-3xl font-extrabold text-pink-400 mb-1">24/7</div>
+                            <div class="text-xs text-gray-300 font-medium">Passion for Coding</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 px-6 lg:px-16 relative border-t border-purple-900/20 bg-darkCard/40">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-xs lg:text-sm font-bold tracking-[0.25em] text-purple-400 uppercase mb-3">Technical Expertise</h2>
+                <h3 class="text-3xl lg:text-5xl font-extrabold tracking-tight">Core <span class="gradient-text">Skills & Technologies</span></h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <div class="glass-panel p-8 rounded-3xl border border-purple-500/30 hover:border-purple-400 hover:shadow-purple-glow transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-500/20 border border-purple-400/50 flex items-center justify-center text-purple-300 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white mb-3">Frontend Dev</h4>
+                    <p class="text-gray-400 text-sm mb-6 font-light">Building responsive, pixel-perfect user interfaces with modern frameworks.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-xl bg-purple-950/60 border border-purple-500/40 text-purple-300 text-xs font-mono">React.js</span>
+                        <span class="px-3 py-1 rounded-xl bg-purple-950/60 border border-purple-500/40 text-purple-300 text-xs font-mono">Tailwind CSS</span>
+                        <span class="px-3 py-1 rounded-xl bg-purple-950/60 border border-purple-500/40 text-purple-300 text-xs font-mono">JavaScript</span>
+                        <span class="px-3 py-1 rounded-xl bg-purple-950/60 border border-purple-500/40 text-purple-300 text-xs font-mono">HTML5 / CSS3</span>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-8 rounded-3xl border border-cyan-500/30 hover:border-cyan-400 hover:shadow-cyan-glow transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center text-cyan-300 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-server"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white mb-3">Backend Engineering</h4>
+                    <p class="text-gray-400 text-sm mb-6 font-light">Developing robust server-side applications, APIs, and microservices.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-xl bg-cyan-950/60 border border-cyan-500/40 text-cyan-300 text-xs font-mono">Node.js</span>
+                        <span class="px-3 py-1 rounded-xl bg-cyan-950/60 border border-cyan-500/40 text-cyan-300 text-xs font-mono">Express.js</span>
+                        <span class="px-3 py-1 rounded-xl bg-cyan-950/60 border border-cyan-500/40 text-cyan-300 text-xs font-mono">REST APIs</span>
+                        <span class="px-3 py-1 rounded-xl bg-cyan-950/60 border border-cyan-500/40 text-cyan-300 text-xs font-mono">Authentication</span>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-8 rounded-3xl border border-pink-500/30 hover:border-pink-400 hover:shadow-pink-glow transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-pink-500/20 border border-pink-400/50 flex items-center justify-center text-pink-300 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-database"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white mb-3">Database & Cloud</h4>
+                    <p class="text-gray-400 text-sm mb-6 font-light">Managing structured & NoSQL databases with optimal query performance.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-xl bg-pink-950/60 border border-pink-500/40 text-pink-300 text-xs font-mono">MongoDB</span>
+                        <span class="px-3 py-1 rounded-xl bg-pink-950/60 border border-pink-500/40 text-pink-300 text-xs font-mono">Mongoose</span>
+                        <span class="px-3 py-1 rounded-xl bg-pink-950/60 border border-pink-500/40 text-pink-300 text-xs font-mono">SQL Basics</span>
+                        <span class="px-3 py-1 rounded-xl bg-pink-950/60 border border-pink-500/40 text-pink-300 text-xs font-mono">Git / GitHub</span>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-8 rounded-3xl border border-purple-500/30 hover:border-purple-400 hover:shadow-purple-glow transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-500/20 border border-purple-400/50 flex items-center justify-center text-purple-300 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white mb-3">AI & Innovation</h4>
+                    <p class="text-gray-400 text-sm mb-6 font-light">Integrating intelligent generative tools and smart automated workflows.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-xl bg-purple-950/60 border border-purple-500/40 text-purple-300 text-xs font-mono">AI Models</span>
+                        <span class="px-3 py-1 rounded-xl bg-purple-950/60 border border-purple-500/40 text-purple-300 text-xs font-mono">Prompt Engineering</span>
+                        <span class="px-3 py-1 rounded-xl bg-purple-950/60 border border-purple-500/40 text-purple-300 text-xs font-mono">Problem Solving</span>
+                        <span class="px-3 py-1 rounded-xl bg-purple-950/60 border border-purple-500/40 text-purple-300 text-xs font-mono">VS Code</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-24 px-6 lg:px-16 relative border-t border-purple-900/20">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-xs lg:text-sm font-bold tracking-[0.25em] text-purple-400 uppercase mb-3">Where I started → where I'm heading</h2>
+                <h3 class="text-3xl lg:text-5xl font-extrabold tracking-tight">Academic <span class="gradient-text">Education</span></h3>
+            </div>
+
+            <!-- Vertical Timeline Container -->
+            <div class="space-y-8 relative before:absolute before:inset-0 before:left-4 sm:before:left-1/2 before:-translate-x-1/2 before:w-0.5 before:bg-gradient-to-b before:from-purple-500 before:via-cyan-500 before:to-pink-500">
+                
+                <!-- Timeline Item 1: B.Tech -->
+                <div class="relative flex flex-col sm:flex-row items-center">
+                    <div class="sm:w-1/2 sm:pr-12 w-full pl-12 sm:pl-0 sm:text-right mb-4 sm:mb-0">
+                        <span class="text-xs font-mono text-purple-400 px-3 py-1 rounded-full glass-panel border border-purple-500/30">2023 — 2027</span>
+                        <h4 class="text-xl font-bold text-white mt-2">B.Tech in Computer Science & Engineering</h4>
+                        <p class="text-purple-300 text-sm font-medium">Srinivasa Institute of Engineering and Technology, Amalapuram</p>
+                        <div class="mt-2 inline-block px-3 py-1 rounded-lg bg-purple-950/80 border border-purple-400/50 text-purple-200 text-xs font-semibold">
+                            CGPA: 8.3
+                        </div>
+                    </div>
+                    <div class="absolute left-4 sm:left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-darkCard border-2 border-purple-500 flex items-center justify-center shadow-purple-glow z-10">
+                        <span class="w-2.5 h-2.5 rounded-full bg-purple-400 animate-pulse"></span>
+                    </div>
+                    <div class="sm:w-1/2 sm:pl-12 w-full pl-12 sm:pl-12 hidden sm:block">
+                        <p class="text-gray-400 text-xs font-light">Focusing on advanced algorithms, software engineering, databases, and full stack web architectures.</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 2: Intermediate -->
+                <div class="relative flex flex-col sm:flex-row items-center">
+                    <div class="sm:w-1/2 sm:pr-12 w-full pl-12 sm:pl-0 sm:text-right mb-4 sm:mb-0 order-1 sm:order-none hidden sm:block">
+                        <p class="text-gray-400 text-xs font-light">Completed higher secondary education under CBSE board with a strong foundation in core sciences and mathematics.</p>
+                    </div>
+                    <div class="absolute left-4 sm:left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-darkCard border-2 border-cyan-500 flex items-center justify-center shadow-cyan-glow z-10 order-2 sm:order-none">
+                        <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
+                    </div>
+                    <div class="sm:w-1/2 sm:pl-12 w-full pl-12 sm:pl-12 order-3 sm:order-none">
+                        <span class="text-xs font-mono text-cyan-400 px-3 py-1 rounded-full glass-panel border border-cyan-500/30">2021 — 2023</span>
+                        <h4 class="text-xl font-bold text-white mt-2">Intermediate (CBSE)</h4>
+                        <p class="text-cyan-300 text-sm font-medium">Swarnandhra International School</p>
+                        <div class="mt-2 inline-block px-3 py-1 rounded-lg bg-cyan-950/80 border border-cyan-400/50 text-cyan-200 text-xs font-semibold">
+                            Percentage: 70%
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 3: Secondary School -->
+                <div class="relative flex flex-col sm:flex-row items-center">
+                    <div class="sm:w-1/2 sm:pr-12 w-full pl-12 sm:pl-0 sm:text-right mb-4 sm:mb-0">
+                        <span class="text-xs font-mono text-pink-400 px-3 py-1 rounded-full glass-panel border border-pink-500/30">2020</span>
+                        <h4 class="text-xl font-bold text-white mt-2">Secondary School — SSC</h4>
+                        <p class="text-pink-300 text-sm font-medium">Bhashyam English Medium High School, Malikipuram</p>
+                        <div class="mt-2 inline-block px-3 py-1 rounded-lg bg-pink-950/80 border border-pink-400/50 text-pink-200 text-xs font-semibold">
+                            Percentage: 100%
+                        </div>
+                    </div>
+                    <div class="absolute left-4 sm:left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-darkCard border-2 border-pink-500 flex items-center justify-center shadow-pink-glow z-10">
+                        <span class="w-2.5 h-2.5 rounded-full bg-pink-400"></span>
+                    </div>
+                    <div class="sm:w-1/2 sm:pl-12 w-full pl-12 sm:pl-12 hidden sm:block">
+                        <p class="text-gray-400 text-xs font-light">Achieved top academic distinction with 100% aggregate score in secondary examinations.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section with 3D Flip Card Effect -->
+    <section id="certifications" class="py-24 px-6 lg:px-16 relative border-t border-purple-900/20 bg-darkCard/40">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-xs lg:text-sm font-bold tracking-[0.25em] text-purple-400 uppercase mb-3">Professional Credentials</h2>
+                <h3 class="text-3xl lg:text-5xl font-extrabold tracking-tight">Verified <span class="gradient-text">Certifications</span> (Hover to Flip)</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Cert 1: Introduction to Modern AI -->
+                <div class="cert-card-container h-72">
+                    <div class="cert-card-inner">
+                        <!-- Front Face -->
+                        <div class="cert-card-front glass-panel p-8 border border-purple-500/30 flex flex-col justify-between shadow-xl">
+                            <div>
+                                <div class="flex items-center justify-between mb-6">
+                                    <div class="w-12 h-12 rounded-2xl bg-purple-500/20 border border-purple-400/50 flex items-center justify-center text-purple-300 text-xl">
+                                        <i class="fa-solid fa-certificate"></i>
+                                    </div>
+                                    <span class="px-3 py-1 rounded-full bg-purple-950/80 border border-purple-500/40 text-purple-300 text-xs font-mono">2026</span>
+                                </div>
+                                <h4 class="text-lg font-bold text-white mb-2">Introduction to Modern AI</h4>
+                                <p class="text-gray-400 text-sm font-medium">Cisco Networking Academy</p>
+                            </div>
+                            <div class="pt-4 border-t border-purple-900/40 flex items-center justify-between text-xs text-purple-400 font-semibold">
+                                <span>Hover to view certificate</span>
+                                <i class="fa-solid fa-rotate text-sm animate-spin" style="animation-duration: 6s;"></i>
+                            </div>
+                        </div>
+                        <!-- Back Face (Flipped Certificate View) -->
+                        <div class="cert-card-back glass-panel p-8 border border-purple-400 flex flex-col justify-between shadow-2xl">
+                            <div class="text-center">
+                                <div class="text-purple-400 text-xs font-mono uppercase tracking-widest mb-1">Official Credential</div>
+                                <h4 class="text-base font-bold text-white mb-2">Introduction to Modern AI</h4>
+                                <div class="w-12 h-0.5 bg-purple-500 mx-auto my-3"></div>
+                                <p class="text-gray-300 text-xs font-light">Awarded by <span class="text-purple-300 font-medium">Cisco Networking Academy</span></p>
+                                <p class="text-gray-400 text-[11px] mt-2">Issued: 2026</p>
+                            </div>
+                            <div class="bg-purple-950/60 p-3 rounded-xl border border-purple-500/30 text-center">
+                                <div class="text-[10px] font-mono text-purple-300 mb-0.5">STATUS</div>
+                                <div class="text-xs font-bold text-emerald-400 flex items-center justify-center gap-1.5">
+                                    <i class="fa-solid fa-circle-check"></i> Verified & Active
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cert 2: MongoDB -->
+                <div class="cert-card-container h-72">
+                    <div class="cert-card-inner">
+                        <!-- Front Face -->
+                        <div class="cert-card-front glass-panel p-8 border border-cyan-500/30 flex flex-col justify-between shadow-xl">
+                            <div>
+                                <div class="flex items-center justify-between mb-6">
+                                    <div class="w-12 h-12 rounded-2xl bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center text-cyan-300 text-xl">
+                                        <i class="fa-solid fa-database"></i>
+                                    </div>
+                                    <span class="px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-500/40 text-cyan-300 text-xs font-mono">2026</span>
+                                </div>
+                                <h4 class="text-lg font-bold text-white mb-2">MongoDB</h4>
+                                <p class="text-gray-400 text-sm font-medium">MongoDB</p>
+                            </div>
+                            <div class="pt-4 border-t border-cyan-900/40 flex items-center justify-between text-xs text-cyan-400 font-semibold">
+                                <span>Hover to view certificate</span>
+                                <i class="fa-solid fa-rotate text-sm animate-spin" style="animation-duration: 6s;"></i>
+                            </div>
+                        </div>
+                        <!-- Back Face -->
+                        <div class="cert-card-back glass-panel p-8 border border-cyan-400 flex flex-col justify-between shadow-2xl">
+                            <div class="text-center">
+                                <div class="text-cyan-400 text-xs font-mono uppercase tracking-widest mb-1">Official Credential</div>
+                                <h4 class="text-base font-bold text-white mb-2">MongoDB Certification</h4>
+                                <div class="w-12 h-0.5 bg-cyan-500 mx-auto my-3"></div>
+                                <p class="text-gray-300 text-xs font-light">Awarded by <span class="text-cyan-300 font-medium">MongoDB</span></p>
+                                <p class="text-gray-400 text-[11px] mt-2">Issued: 2026</p>
+                            </div>
+                            <div class="bg-cyan-950/60 p-3 rounded-xl border border-cyan-500/30 text-center">
+                                <div class="text-[10px] font-mono text-cyan-300 mb-0.5">STATUS</div>
+                                <div class="text-xs font-bold text-emerald-400 flex items-center justify-center gap-1.5">
+                                    <i class="fa-solid fa-circle-check"></i> Verified & Active
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cert 3: Skills Passport -->
+                <div class="cert-card-container h-72">
+                    <div class="cert-card-inner">
+                        <!-- Front Face -->
+                        <div class="cert-card-front glass-panel p-8 border border-pink-500/30 flex flex-col justify-between shadow-xl">
+                            <div>
+                                <div class="flex items-center justify-between mb-6">
+                                    <div class="w-12 h-12 rounded-2xl bg-pink-500/20 border border-pink-400/50 flex items-center justify-center text-pink-300 text-xl">
+                                        <i class="fa-solid fa-award"></i>
+                                    </div>
+                                    <span class="px-3 py-1 rounded-full bg-pink-950/80 border border-pink-500/40 text-pink-300 text-xs font-mono">2025</span>
+                                </div>
+                                <h4 class="text-lg font-bold text-white mb-2">Skills Passport</h4>
+                                <p class="text-gray-400 text-sm font-medium">EY & Microsoft</p>
+                            </div>
+                            <div class="pt-4 border-t border-pink-900/40 flex items-center justify-between text-xs text-pink-400 font-semibold">
+                                <span>Hover to view certificate</span>
+                                <i class="fa-solid fa-rotate text-sm animate-spin" style="animation-duration: 6s;"></i>
+                            </div>
+                        </div>
+                        <!-- Back Face -->
+                        <div class="cert-card-back glass-panel p-8 border border-pink-400 flex flex-col justify-between shadow-2xl">
+                            <div class="text-center">
+                                <div class="text-pink-400 text-xs font-mono uppercase tracking-widest mb-1">Official Credential</div>
+                                <h4 class="text-base font-bold text-white mb-2">Skills Passport</h4>
+                                <div class="w-12 h-0.5 bg-pink-500 mx-auto my-3"></div>
+                                <p class="text-gray-300 text-xs font-light">Awarded by <span class="text-pink-300 font-medium">EY & Microsoft</span></p>
+                                <p class="text-gray-400 text-[11px] mt-2">Issued: 2025</p>
+                            </div>
+                            <div class="bg-pink-950/60 p-3 rounded-xl border border-pink-500/30 text-center">
+                                <div class="text-[10px] font-mono text-pink-300 mb-0.5">STATUS</div>
+                                <div class="text-xs font-bold text-emerald-400 flex items-center justify-center gap-1.5">
+                                    <i class="fa-solid fa-circle-check"></i> Verified & Active
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cert 4: AWS Academy Data Engineering -->
+                <div class="cert-card-container h-72">
+                    <div class="cert-card-inner">
+                        <!-- Front Face -->
+                        <div class="cert-card-front glass-panel p-8 border border-emerald-500/30 flex flex-col justify-between shadow-xl">
+                            <div>
+                                <div class="flex items-center justify-between mb-6">
+                                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-400/50 flex items-center justify-center text-emerald-300 text-xl">
+                                        <i class="fa-solid fa-cloud"></i>
+                                    </div>
+                                    <span class="px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 text-xs font-mono">2025</span>
+                                </div>
+                                <h4 class="text-lg font-bold text-white mb-2">AWS Academy Data Engineering</h4>
+                                <p class="text-gray-400 text-sm font-medium">AWS Academy</p>
+                            </div>
+                            <div class="pt-4 border-t border-emerald-900/40 flex items-center justify-between text-xs text-emerald-400 font-semibold">
+                                <span>Hover to view certificate</span>
+                                <i class="fa-solid fa-rotate text-sm animate-spin" style="animation-duration: 6s;"></i>
+                            </div>
+                        </div>
+                        <!-- Back Face -->
+                        <div class="cert-card-back glass-panel p-8 border border-emerald-400 flex flex-col justify-between shadow-2xl">
+                            <div class="text-center">
+                                <div class="text-emerald-400 text-xs font-mono uppercase tracking-widest mb-1">Official Credential</div>
+                                <h4 class="text-base font-bold text-white mb-2">AWS Academy Data Engineering</h4>
+                                <div class="w-12 h-0.5 bg-emerald-500 mx-auto my-3"></div>
+                                <p class="text-gray-300 text-xs font-light">Awarded by <span class="text-emerald-300 font-medium">AWS Academy</span></p>
+                                <p class="text-gray-400 text-[11px] mt-2">Issued: 2025</p>
+                            </div>
+                            <div class="bg-emerald-950/60 p-3 rounded-xl border border-emerald-500/30 text-center">
+                                <div class="text-[10px] font-mono text-emerald-300 mb-0.5">STATUS</div>
+                                <div class="text-xs font-bold text-emerald-400 flex items-center justify-center gap-1.5">
+                                    <i class="fa-solid fa-circle-check"></i> Verified & Active
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 px-6 lg:px-16 relative border-t border-purple-900/20">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-xs lg:text-sm font-bold tracking-[0.25em] text-purple-400 uppercase mb-3">Featured Work</h2>
+                <h3 class="text-3xl lg:text-5xl font-extrabold tracking-tight">Recent <span class="gradient-text">Projects</span></h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Project 1: Get Admission For Future -->
+                <a href="https://getadmissionsforfuture.github.io/Student-guidance-website/" target="_blank" rel="noopener noreferrer" class="project-card-3d glass-panel rounded-3xl border border-purple-500/30 overflow-hidden group hover:border-purple-400 transition-all flex flex-col justify-between cursor-pointer relative">
+                    <div class="absolute inset-0 bg-gradient-to-b from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                    <div class="h-48 bg-gradient-to-tr from-purple-950 via-darkCard to-indigo-950 relative overflow-hidden flex items-center justify-center p-6 border-b border-purple-900/30">
+                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(168,85,247,0.25)_0%,transparent_70%)]"></div>
+                        <div class="w-16 h-16 rounded-2xl bg-purple-500/20 border border-purple-400 flex items-center justify-center text-purple-300 text-3xl group-hover:scale-110 transition-transform shadow-purple-glow">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <span class="absolute top-4 right-4 px-3 py-1 rounded-full bg-purple-950/90 border border-purple-400 text-purple-300 text-xs font-mono">Study Abroad</span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow justify-between relative z-10">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="text-lg font-bold text-white group-hover:text-purple-300 transition-colors">Get Admission For Future</h4>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-purple-400 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
+                            </div>
+                            <p class="text-gray-300 text-xs font-light mb-4">A modern study-abroad admission platform designed to help students explore opportunities and submit details.</p>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-4">
+                                <span class="px-2 py-0.5 rounded-lg bg-purple-950/80 border border-purple-500/40 text-[10px] font-mono text-purple-300">HTML5</span>
+                                <span class="px-2 py-0.5 rounded-lg bg-purple-950/80 border border-purple-500/40 text-[10px] font-mono text-purple-300">CSS3</span>
+                                <span class="px-2 py-0.5 rounded-lg bg-purple-950/80 border border-purple-500/40 text-[10px] font-mono text-purple-300">JavaScript</span>
+                            </div>
+                            <div class="flex items-center text-purple-400 font-semibold text-xs group-hover:text-purple-300 transition-colors">
+                                View Project <i class="fa-solid fa-arrow-right ml-1.5 text-[10px]"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 2: ResumeCraft AI -->
+                <a href="#contact" class="project-card-3d glass-panel rounded-3xl border border-cyan-500/30 overflow-hidden group hover:border-cyan-400 transition-all flex flex-col justify-between cursor-pointer relative">
+                    <div class="absolute inset-0 bg-gradient-to-b from-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                    <div class="h-48 bg-gradient-to-tr from-cyan-950 via-darkCard to-blue-950 relative overflow-hidden flex items-center justify-center p-6 border-b border-cyan-900/30">
+                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.25)_0%,transparent_70%)]"></div>
+                        <div class="w-16 h-16 rounded-2xl bg-cyan-500/20 border border-cyan-400 flex items-center justify-center text-cyan-300 text-3xl group-hover:scale-110 transition-transform shadow-cyan-glow">
+                            <i class="fa-solid fa-file-lines"></i>
+                        </div>
+                        <span class="absolute top-4 right-4 px-3 py-1 rounded-full bg-cyan-950/90 border border-cyan-400 text-cyan-300 text-xs font-mono">AI Resume Builder</span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow justify-between relative z-10">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors">ResumeCraft AI</h4>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-cyan-400 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
+                            </div>
+                            <p class="text-gray-300 text-xs font-light mb-4">An AI-powered resume builder that helps users create professional resumes quickly using a clean interface.</p>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-4">
+                                <span class="px-2 py-0.5 rounded-lg bg-cyan-950/80 border border-cyan-500/40 text-[10px] font-mono text-cyan-300">React.js</span>
+                                <span class="px-2 py-0.5 rounded-lg bg-cyan-950/80 border border-cyan-500/40 text-[10px] font-mono text-cyan-300">AI Integration</span>
+                            </div>
+                            <div class="flex items-center text-cyan-400 font-semibold text-xs group-hover:text-cyan-300 transition-colors">
+                                View Project <i class="fa-solid fa-arrow-right ml-1.5 text-[10px]"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 3: FileCraft AI -->
+                <a href="https://mounikagumpula645.github.io/FileCraft---Free-Online-Files-Tool/" target="_blank" rel="noopener noreferrer" class="project-card-3d glass-panel rounded-3xl border border-pink-500/30 overflow-hidden group hover:border-pink-400 transition-all flex flex-col justify-between cursor-pointer relative">
+                    <div class="absolute inset-0 bg-gradient-to-b from-pink-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                    <div class="h-48 bg-gradient-to-tr from-pink-950 via-darkCard to-purple-950 relative overflow-hidden flex items-center justify-center p-6 border-b border-pink-900/30">
+                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(236,72,153,0.25)_0%,transparent_70%)]"></div>
+                        <div class="w-16 h-16 rounded-2xl bg-pink-500/20 border border-pink-400 flex items-center justify-center text-pink-300 text-3xl group-hover:scale-110 transition-transform shadow-pink-glow">
+                            <i class="fa-solid fa-folder-open"></i>
+                        </div>
+                        <span class="absolute top-4 right-4 px-3 py-1 rounded-full bg-pink-950/90 border border-pink-400 text-pink-300 text-xs font-mono">File Utilities</span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow justify-between relative z-10">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="text-lg font-bold text-white group-hover:text-pink-300 transition-colors">FileCraft AI</h4>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-pink-400 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
+                            </div>
+                            <p class="text-gray-300 text-xs font-light mb-4">A collection of smart browser-based file and document utilities for everyday file processing.</p>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-4">
+                                <span class="px-2 py-0.5 rounded-lg bg-pink-950/80 border border-pink-500/40 text-[10px] font-mono text-pink-300">JavaScript</span>
+                                <span class="px-2 py-0.5 rounded-lg bg-pink-950/80 border border-pink-500/40 text-[10px] font-mono text-pink-300">PDF Tools</span>
+                            </div>
+                            <div class="flex items-center text-pink-400 font-semibold text-xs group-hover:text-pink-300 transition-colors">
+                                View Project <i class="fa-solid fa-arrow-right ml-1.5 text-[10px]"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 4: Demo-School-website -->
+                <a href="https://idyllic-tartufo-1b33da.netlify.app" target="_blank" rel="noopener noreferrer" class="project-card-3d glass-panel rounded-3xl border border-emerald-500/30 overflow-hidden group hover:border-emerald-400 transition-all flex flex-col justify-between cursor-pointer relative">
+                    <div class="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                    <div class="h-48 bg-gradient-to-tr from-emerald-950 via-darkCard to-teal-950 relative overflow-hidden flex items-center justify-center p-6 border-b border-emerald-900/30">
+                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.25)_0%,transparent_70%)]"></div>
+                        <div class="w-16 h-16 rounded-2xl bg-emerald-500/20 border border-emerald-400 flex items-center justify-center text-emerald-300 text-3xl group-hover:scale-110 transition-transform shadow-[0_0_20px_rgba(16,185,129,0.5)]">
+                            <i class="fa-solid fa-school"></i>
+                        </div>
+                        <span class="absolute top-4 right-4 px-3 py-1 rounded-full bg-emerald-950/90 border border-emerald-400 text-emerald-300 text-xs font-mono">School Portal</span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow justify-between relative z-10">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="text-lg font-bold text-white group-hover:text-emerald-300 transition-colors">Demo School Website</h4>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-emerald-400 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
+                            </div>
+                            <p class="text-gray-300 text-xs font-light mb-4">Built a professional website for an educational institute with the help of HTML5, JavaScript, CSS, and modern web features.</p>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-4">
+                                <span class="px-2 py-0.5 rounded-lg bg-emerald-950/80 border border-emerald-500/40 text-[10px] font-mono text-emerald-300">HTML5</span>
+                                <span class="px-2 py-0.5 rounded-lg bg-emerald-950/80 border border-emerald-500/40 text-[10px] font-mono text-emerald-300">CSS3</span>
+                                <span class="px-2 py-0.5 rounded-lg bg-emerald-950/80 border border-emerald-500/40 text-[10px] font-mono text-emerald-300">JavaScript</span>
+                            </div>
+                            <div class="flex items-center text-emerald-400 font-semibold text-xs group-hover:text-emerald-300 transition-colors">
+                                View Project <i class="fa-solid fa-arrow-right ml-1.5 text-[10px]"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-24 px-6 lg:px-16 relative border-t border-purple-900/20 bg-darkCard/40">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-xs lg:text-sm font-bold tracking-[0.25em] text-purple-400 uppercase mb-3">Career Journey</h2>
+                <h3 class="text-3xl lg:text-5xl font-extrabold tracking-tight">Experience & <span class="gradient-text">Milestones</span></h3>
+            </div>
+
+            <div class="space-y-8 relative before:absolute before:inset-0 before:left-4 sm:before:left-1/2 before:-translate-x-1/2 before:w-0.5 before:bg-purple-900/50">
+                
+                <div class="relative flex flex-col sm:flex-row items-center">
+                    <div class="sm:w-1/2 sm:pr-12 w-full pl-10 sm:pl-0 sm:text-right mb-4 sm:mb-0">
+                        <span class="text-xs font-mono text-cyan-400 px-3 py-1 rounded-full glass-panel border border-cyan-500/30">2025 — Present</span>
+                        <h4 class="text-xl font-bold text-white mt-2">Full Stack Developer</h4>
+                        <p class="text-purple-300 text-sm font-medium">Independent & Freelance Solutions</p>
+                    </div>
+                    <div class="absolute left-4 sm:left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-darkCard border-2 border-purple-500 flex items-center justify-center shadow-purple-glow z-10">
+                        <span class="w-2.5 h-2.5 rounded-full bg-pink-500"></span>
+                    </div>
+                    <div class="sm:w-1/2 sm:pl-12 w-full pl-10 sm:pl-12">
+                        <p class="text-gray-300 text-sm font-light">Designing and implementing scalable MERN stack web applications and AI tools for diverse global clients.</p>
+                    </div>
+                </div>
+
+                <div class="relative flex flex-col sm:flex-row items-center">
+                    <div class="sm:w-1/2 sm:pr-12 w-full pl-10 sm:pl-0 sm:text-right mb-4 sm:mb-0 order-1 sm:order-none">
+                        <p class="text-gray-300 text-sm font-light">Collaborated with senior software engineers to develop reactive frontend components and optimize MongoDB backend schemas.</p>
+                    </div>
+                    <div class="absolute left-4 sm:left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-darkCard border-2 border-purple-500 flex items-center justify-center shadow-purple-glow z-10 order-2 sm:order-none">
+                        <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
+                    </div>
+                    <div class="sm:w-1/2 sm:pl-12 w-full pl-10 sm:pl-12 order-3 sm:order-none">
+                        <span class="text-xs font-mono text-purple-400 px-3 py-1 rounded-full glass-panel border border-purple-500/30">2024 — 2025</span>
+                        <h4 class="text-xl font-bold text-white mt-2">Frontend & Web Intern</h4>
+                        <p class="text-cyan-300 text-sm font-medium">Tech Innovations Lab</p>
+                    </div>
+                </div>
+
+                <div class="relative flex flex-col sm:flex-row items-center">
+                    <div class="sm:w-1/2 sm:pr-12 w-full pl-10 sm:pl-0 sm:text-right mb-4 sm:mb-0">
+                        <span class="text-xs font-mono text-pink-400 px-3 py-1 rounded-full glass-panel border border-pink-500/30">2022 — 2026</span>
+                        <h4 class="text-xl font-bold text-white mt-2">B.Tech in Computer Science</h4>
+                        <p class="text-purple-300 text-sm font-medium">Engineering & AI Focus</p>
+                    </div>
+                    <div class="absolute left-4 sm:left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-darkCard border-2 border-purple-500 flex items-center justify-center shadow-purple-glow z-10">
+                        <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
+                    </div>
+                    <div class="sm:w-1/2 sm:pl-12 w-full pl-10 sm:pl-12">
+                        <p class="text-gray-300 text-sm font-light">Mastered data structures, algorithms, object-oriented programming, and advanced database architecture.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 px-6 lg:px-16 relative border-t border-purple-900/20">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-xs lg:text-sm font-bold tracking-[0.25em] text-purple-400 uppercase mb-3">Get In Touch</h2>
+                <h3 class="text-3xl lg:text-5xl font-extrabold tracking-tight">Let's Build Something <span class="gradient-text">Amazing Together</span></h3>
+            </div>
+
+            <div class="glass-panel p-8 sm:p-12 rounded-3xl border border-purple-500/30 shadow-2xl relative overflow-hidden">
+                <div class="absolute -right-20 -bottom-20 w-60 h-60 bg-purple-600/20 rounded-full blur-[60px] pointer-events-none"></div>
+
+                <form id="contact-form" class="space-y-6 relative z-10" onsubmit="handleFormSubmit(event)">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-mono uppercase tracking-wider text-purple-300 mb-2">Your Name</label>
+                            <input type="text" required placeholder="Mounika Gumpula" class="w-full bg-darkCard/80 border border-purple-500/40 rounded-xl px-4 py-3.5 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-mono uppercase tracking-wider text-purple-300 mb-2">Your Email</label>
+                            <input type="email" required placeholder="mounikagumpula66@gmail.com" class="w-full bg-darkCard/80 border border-purple-500/40 rounded-xl px-4 py-3.5 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all text-sm">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-mono uppercase tracking-wider text-purple-300 mb-2">Subject</label>
+                        <input type="text" required placeholder="Project Collaboration / Opportunity" class="w-full bg-darkCard/80 border border-purple-500/40 rounded-xl px-4 py-3.5 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-mono uppercase tracking-wider text-purple-300 mb-2">Message</label>
+                        <textarea rows="5" required placeholder="Tell me about your project or inquiry..." class="w-full bg-darkCard/80 border border-purple-500/40 rounded-xl px-4 py-3.5 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all text-sm resize-none"></textarea>
+                    </div>
+                    <button type="submit" class="w-full gradient-btn py-4 rounded-xl font-bold text-white tracking-wide shadow-lg shadow-purple-950 flex items-center justify-center gap-3">
+                        Send Message <i class="fa-solid fa-paper-plane text-xs"></i>
+                    </button>
+                </form>
+
+                <div id="success-msg" class="hidden mt-6 p-4 rounded-xl bg-emerald-950/80 border border-emerald-500 text-emerald-300 text-center font-medium text-sm">
+                    Thank you! Your message has been sent successfully. I will get back to you soon.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 lg:px-16 border-t border-purple-900/30 glass-panel">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-purple-600 to-cyan-500 p-[2px]">
+                    <div class="w-full h-full bg-darkCard rounded-[10px] flex items-center justify-center font-bold text-sm text-white">
+                        MG
+                    </div>
+                </div>
+                <span class="font-bold text-base text-white">Mounika Gumpula</span>
+            </div>
+            <p class="text-xs text-gray-400 font-light">
+                © 2026 Mounika Gumpula. Built with HTML, Tailwind CSS & JavaScript.
+            </p>
+            <div class="flex items-center gap-4">
+                <a href="https://github.com/MounikaGumpula645" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors"><i class="fa-brands fa-github text-lg"></i></a>
+                <a href="https://www.linkedin.com/in/mounika-gumpula-4110b234a/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-cyan-400 transition-colors"><i class="fa-brands fa-linkedin text-lg"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const form = document.getElementById('contact-form');
+            const successMsg = document.getElementById('success-msg');
+            
+            form.reset();
+            successMsg.classList.remove('hidden');
+            
+            setTimeout(() => {
+                successMsg.classList.add('hidden');
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
